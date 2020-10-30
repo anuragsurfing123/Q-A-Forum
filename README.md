@@ -6,7 +6,7 @@ A Question and answer Forum in mern stack
 # Guidelines to setup
 1. First Go TO `setup` folder open `myurl.js` then put your mongodb url in place of `myurl:"Your MongoDB Url"`.
 
-2.Then run `npm install` For Generating `node_module`.
+2. Then run `npm install` For Generating `node_module`.
 
 ## For API Documentation Go To url given below
 
