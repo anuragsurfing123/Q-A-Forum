@@ -168,7 +168,7 @@ router.post(
     (req, res) => {
       Profile.findOne({ user: req.user.id })
         .then(profile => {
-          //assignment
+          
           const newWork = {
             role: req.body.role,
             company: req.body.company,
