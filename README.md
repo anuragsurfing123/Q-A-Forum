@@ -18,8 +18,9 @@ A Question and answer Forum in mern stack
 ## My Tech Stack (MERN)
 
 
-Front End Framework : `React Js`
-Styling: `SASS` and `BOOTSTRAP`
+Front End Framework : `React Js`.
+
+Styling: `SASS` and `BOOTSTRAP`.
 
 # Guidelines to setup
 1. Create a `.env` file and the format should be as `Your API URL`.
