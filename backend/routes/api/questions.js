@@ -221,14 +221,7 @@ router.delete('/delete/:AnswerId/:QuestionId/:userId',passport.authenticate('jwt
 } 
 
 )
-//assignment
 
-// remove upvoting
-// delete questions
-
-// delete all questions
-
-// Create a seperate for linux questions (3 part error exctra)
 
 
 
