@@ -16,6 +16,8 @@ import Upvote from './user/Upvote';
 import Contactus from './user/Contactus';
 import AnswersOfQuestion from './user/AnswerOfQuestion';
 import UpdateQuestions from './user/UpdateQuestions';
+import FindEveryone from './user/FindEveryone';
+import FindAllUser from './user/FindAllUser';
 
 const  Routes=()=> {
     return (
@@ -44,6 +46,9 @@ const  Routes=()=> {
 
 
             <AdminRoute path="/admin/dashboard" exact component={AdminDashBoard}/>
+            <AdminRoute path="/find/everyone" exact component={FindEveryone}/>
+            <AdminRoute path="/allprofile" exact component={FindAllUser}/>
+
 
         </switch>
         </BrowserRouter>
