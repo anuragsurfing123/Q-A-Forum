@@ -4,7 +4,7 @@ const bcrypt=require('bcryptjs');
 const jsonwt = require("jsonwebtoken");
 const passport = require("passport");
 const key=require('../../setup/myurl');
-
+const { check, validationResult } = require("express-validator");
 
 
 //@type    GET
@@ -24,7 +24,26 @@ const Person=require("../../models/Person");
 //@desc    route dor registration of user
 //@access   PUBLIC
 
-router.post('/register',(req,res)=>{
+router.post('/register',
+[
+    check("name", "minimum lenngth should be 3 character").isLength({ min: 3 }),
+    check("email", "Enter a valid email").isEmail(),
+    check("password", "minimum lenngth should be 3 character").isLength({ min: 3 }),
+    
+
+
+  ],
+
+(req,res)=>{
+
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+     return res.status(422).json({
+       error: errors.array()[0].msg
+     });
+   }
+
 
     Person.findOne({email:req.body.email})
     .then(person=>{
@@ -123,6 +142,15 @@ router.post('/login',(req,res)=>{
 
 
 
+
+
+
+
+
+
+
+
+
 router.get("/signout",(req, res) => {
     res.clearCookie("token");
     res.json({
@@ -151,6 +179,30 @@ router.get("/profile",
         })
     }
 );
+
+
+
+
+
+
+
+router.get("/allprofile",
+passport.authenticate("jwt", { session: false }),
+(req,res)=>{
+    
+    Person.find()
+    .then(person=>{
+        if(!person){
+            return res.status(404).json({error:'No User'});
+        }
+        else{
+            res.json(person)
+        }
+    }
+        )
+    }
+)
+
 
 
 
