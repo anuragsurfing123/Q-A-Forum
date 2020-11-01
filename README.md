@@ -28,6 +28,7 @@ Styling: `SASS` and `BOOTSTRAP`.
 # Guidelines to setup
 1. Create a `.env` file and the format should be as `Your API URL`.
 2. Then run `npm install`.
+3. Create a User by `signup` after that goto mongobd database then `edit role:1(0->1)` Now this user is a admin 
 
 (API Detail is Given in Back End Part)
 
