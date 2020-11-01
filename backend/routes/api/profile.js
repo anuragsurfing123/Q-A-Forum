@@ -8,6 +8,55 @@ const Person=require("../../models/Person");
 //load profile model
 const Profile=require("../../models/Profile");
 
+
+
+
+getprofileById = (req, res, next, id) => {
+    Profile.findById(id).exec((err, profiles) => {
+      if (err || !profiles) {
+        return res.status(400).json({
+          error: "Profile not found in DB"
+        });
+      }
+      req.profiledetail = profiles;
+      
+      next();
+    });
+  };
+  
+  
+  
+  
+  
+  
+  
+  getUserById=(req,res,next,id)=>{
+    Person.findById(id).exec((err,user)=>{
+  if(err || !user){
+    return res.status(400).json({
+        error:"No User Found in DB"
+    })
+  
+  }
+  req.profile=user
+  next();
+    })
+  }
+  
+  
+  router.param("userId",getUserById);
+  router.param("ProfileId",getprofileById);
+
+
+
+
+
+
+
+
+
+
+
 //@type    GET
 //@route   /api/profile
 //@desc    route for profile of personal user
@@ -15,6 +64,7 @@ const Profile=require("../../models/Profile");
 router.get('/',
 passport.authenticate('jwt',{session:false}),
 (req,res)=>{
+  
     Profile.findOne({user:req.user.id})
     .then(profile=>{
         if(!profile){
@@ -209,11 +259,24 @@ passport.authenticate("jwt", { session: false }),(req,res)=>{
 });
 
 
-  //@type    POST
-//@route   /api/profile/workrole/:w_id
-//@desc    route for deleting a specific workrole
-//@access   PRIVATE
-
+  //delete profile
+router.delete('/delete/:ProfileId/:userId',passport.authenticate('jwt',{session:false}),(req, res) => {
+    const profiledetail = req.profiledetail;
+    console.log(req.profiledetail)
+  console.log(profiledetail)
+  profiledetail.remove((error, question) => {
+      if (error) {
+        return res.status(400).json({
+          error: "Failed to delete this Profile"
+        });
+      }
+      res.json({
+        message: "Profile Successfull deleted"
+      });
+    });
+  }
+  
+  )
 
 
 module.exports=router;
