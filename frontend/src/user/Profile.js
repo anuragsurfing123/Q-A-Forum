@@ -22,7 +22,7 @@ const loadProfile=()=>{
     
     getprofile(_id,token).then(data=>{
        
-       
+       console.log(data)
         if(error){
             
             
@@ -31,6 +31,7 @@ const loadProfile=()=>{
         else{
            
             setProfile(data)
+            console.log(data)
             
         }
     })
@@ -48,18 +49,18 @@ useEffect(()=>{
 
 
 
-// const deleteThisUserProfile=()=>{
-//     deleteUserProfile(_id,token).then(data=>{
-//         if(data.error){
-//             console.log(data.error)
-//         }else{
-//             loadProfile()
+const deleteCurrentProfile=(ProfileId)=>{
+    deleteUserProfile(ProfileId,_id,token).then(data=>{
+        if(data.error){
+            console.log(data.error)
+        }else{
+           return( <Redirect to="/signout"/>)
             
            
-//         }
+        }
 
-//     })
-// }
+    })
+}
 
 
 
@@ -75,6 +76,7 @@ const adminRightSide=()=>{
      
         <div className="card mb-4">
             <h4 className="card-header">User Information</h4>
+        {/* {isAuthenticated&&<button className="p-3" onClick={()=>{deleteCurrentProfile(profile._id)}} className="btn btn-danger">Delete</button>} */}
             <ul className="list-group">
                 <li className="list-group-item">
                     <span className="badge badge-success mr-2">Name:</span>
@@ -91,9 +93,10 @@ const adminRightSide=()=>{
                 </li>
 
 
-
+<div>
                 <li className="list-group-item">
                     <span className="badge badge-danger mr-2">User Profile</span>
+                    
                    {profile.error?( <Link className="btn btn-success float-right" to="/user/profile/insert">Insert UserProfile</Link>):""}
                    
                 </li>
@@ -120,6 +123,12 @@ const adminRightSide=()=>{
                         
                     
                 </li>
+
+
+
+                
+                
+                </div>
             </ul>
             {/* <button className="btn btn-danger rounded" onClick={()=>{deleteThisUserProfile(_id)}}>Delete User Profile</button> */}
         </div>

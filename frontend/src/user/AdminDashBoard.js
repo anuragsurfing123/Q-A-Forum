@@ -55,7 +55,10 @@ const AdminDashBoard=()=> {
     return (
 
         <Base title="Welcome to Admin Area" description="Manage Question And Answers" className="container">
+            {isAuthenticated&&<Link className="btn btn-info rounded" to={`/find/everyone`}>All Profiles</Link>}
+            {isAuthenticated&&<Link className="btn btn-info rounded m-4" to={`/allprofile`}>All Users</Link>}
         <div>
+            <h3 className="p-5 text-info">All Questions</h3>
         {questions.map((questions,index)=>{
             return(
                 <div class="container">
